@@ -41,6 +41,7 @@
 
 		// Off-Canvas Navigation.
 
+		/*
 			// Navigation Panel Toggle.
 				$('<a href="#navPanel" class="navPanelToggle"></a>')
 					.appendTo($body);
@@ -66,6 +67,13 @@
 				if (skel.vars.os == 'wp' && skel.vars.osVersion < 10)
 					$('#navPanel')
 						.css('transition', 'none');
+		*/
+
+		// FORM
+		// $('form').on('submit', function(event) {
+		// 	event.stopPropagation();
+		// 	event.preventDefault();
+		// });
 
 	});
 

@@ -1,0 +1,4 @@
+.not-button {
+    cursor: initial !important;
+    pointer-events: none;
+}
