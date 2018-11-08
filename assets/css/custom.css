@@ -2,3 +2,15 @@
     cursor: initial !important;
     pointer-events: none;
 }
+
+a {
+    border-bottom: 1px dashed;
+}
+
+a.no {
+    border-bottom: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
