@@ -14,3 +14,21 @@ a.no {
 a:hover {
     text-decoration: none;
 }
+
+h2 {
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+h3, p, ul {
+	margin-bottom: 0;
+}
+
+p, li {
+	margin-bottom: 10px;
+	line-height: 1.6em;
+}
+
+strong {
+	color: #111;
+}
