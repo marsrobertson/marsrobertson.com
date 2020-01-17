@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>TTTT - Trustless Token Transfer Trade</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:title" content="TTTT - Trustless Token Transfer Trade"/>
+    <meta property="og:image" content="https://genesis.re/trustless-token-transfer-trade/web/preview.jpg"/>
+    <meta property="og:site_name" content="TTTT - Trustless Token Transfer Trade"/>
+    <meta property="og:description" content="TTTT - Trustless Token Transfer Trade"/>
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@marsxrobertson">
+    <meta name="twitter:creator" content="@marsxrobertson">
+    <meta name="twitter:title" content="TTTT - Trustless Token Transfer Trade">
+    <meta name="twitter:description" content="TTTT - Trustless Token Transfer Trade">
+    <meta name="twitter:image" content="https://genesis.re/trustless-token-transfer-trade/web/preview.jpg">
+
+    <link rel='shortcut icon' href='favicon.ico' type='image/x-icon' /> <!-- required for MetaMask https://ethereum.stackexchange.com/questions/64979/how-do-you-set-an-icon-for-metamask-dapp-connect-popup-prompt -->
+    <link rel="stylesheet" href="web/normalize.css">
+    <link rel="stylesheet" href="web/gh-fork-ribbon.css">
+    <link rel="stylesheet" href="web/styles.css">
+
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.min.js" integrity="sha384-ohHihtNCeV+nANVRC/pjmE/UTXjBH4DhrTT0hBMYOaI1AXxaKUg7apjcpJQTKIf6" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js" integrity="sha384-JUMjoW8OzDJw4oFpWIB2Bu/c6768ObEthBMVSiIx4ruBIEdyNSUQAjJNFqT5pnJ6" crossorigin="anonymous"></script>
+    
+  </head>
+  <body ng-app="app" ng-cloak>
+
+<a class="github-fork-ribbon" href="https://github.com/genesisdotre/trustless-token-transfer-trade" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
+
+<div class="container-main-wrapper"> <!-- dont't want to use generic names like "container" -->
+     <h1>TTTT Trustless Token Transfer Trade</h1>  
+
+     <p>Check <a href="https://github.com/genesisdotre/trustless-token-transfer-trade">readme on GitHub</a> for more detailed information about the code and design.</p>
+
+     <p class="longline">Contract: <a href="https://etherscan.io/address/0xa0db2db59bd7a8cb89b3f0dbe26ef2ac8352785d">etherscan.io/address/0xa0db2db59bd7a8cb89b3f0dbe26ef2ac8352785d</a></p>
+
+     <p class="longline">Token: <a href="https://etherscan.io/token/0x5d3a4b00db536f7e2be988bc84d92598ed116217">etherscan.io/token/0x5d3a4b00db536f7e2be988bc84d92598ed116217</a></p>
+
+     <p>Send some ETH to the TTTT and receive MARS token.</p>
+
+    <center>
+     <label for="rate" id="rateLabel">&nbsp;<!-- inserted dynamically via JavaScript --></label>
+     <input type="text" id="rate" readonly><br>
+     <label for="validTo">Rate valid till:</label>
+     <input type="text" id="validTo" readonly>
+
+     <form id="trade">
+      <label for="eth">How much ETH do you want to send?</label>
+      <input type="number" min="0" step="0.001" value="0.001" id="eth" placeholder="0.001 ETH" autofocus><br>
+
+      <label for="pnk">You'll receive that many MARS:</label>
+      <input type="text" id="pnk" value="" readonly><br>     
+      <br>
+      <input type="submit" id="send" value="Trade">
+     </form>
+    </center>
+</div> <!-- container-main-wrapper -->
+
+     <script src="web/lib/assist.min.js"></script>
+     <script>
+       const web3 = new Web3(Web3.givenProvider || 'ws://localhost:8546', null, {}); // initialising it: https://web3js.readthedocs.io/en/1.0/getting-started.html
+       console.log("It works: " + web3.version);
+     </script>
+     <script src="web/app.js"></script>
+
+  </body>
+</html>
+
