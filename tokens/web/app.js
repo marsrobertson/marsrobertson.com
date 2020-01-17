@@ -26,7 +26,7 @@ assistInstance.onboard()
 
         rate = await contract.methods.rate().call(); 
         $("#rate").val(rate); 
-        $("#rateLabel").text(`Current rate 1 ETH = ${rate} MARS:`)
+        $("#rateLabel").text(`Fixed rate 1 ETH = ${rate} $MARS:`)
         $("#eth").trigger("input");
     })
     .catch(function(error) {
@@ -52,6 +52,6 @@ $("#eth").on("input", function() {
         $(this).removeClass("error"); 
     }
     let pnk = rate * float;
-    console.log(`With ${float} you can get ${pnk.toFixed(2)} PNK`);
+    console.log(`With ${float} you can get ${pnk.toFixed(2)} MARS`);
     $("#pnk").val(pnk.toFixed(3));
 })
