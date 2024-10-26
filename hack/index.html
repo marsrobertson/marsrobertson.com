@@ -27,11 +27,15 @@
 
       app.controller("HomeCtrl", function($scope, $http) {
         $scope.sliderValue = 0;
+        $scope.sliderValue2 = 0;
         $scope.sliderTouched = false;
+        $scope.sliderTouched2 = false;
 
         $scope.change = function() {
             $scope.sliderTouched = true;
-            console.log("Slider value changed to:", $scope.sliderValue);
+        }
+        $scope.change2 = function() {
+            $scope.sliderTouched2 = true;
         }
 
         $scope.submit = function() {
@@ -101,7 +105,7 @@
         </span>
         <span class="tobottom">
             <span class="label-small" ng-if="!sliderTouched2">move the slider to decide</span>
-            <span class="label" ng-if="sliderTouched2">{{sliderValue}}</span>
+            <span class="label" ng-if="sliderTouched2">{{sliderValue2}}</span>
         </span>
 
         <br><br>
