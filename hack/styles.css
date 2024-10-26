@@ -1,0 +1,27 @@
+input[type=range] {
+    -webkit-appearance: none;
+    height: 10px;
+    background: lightgray;  /* Track color */
+    border-radius: 5px;
+    outline: none;
+    opacity: 0.7;
+}
+
+.question {
+    height: 40px;
+}
+
+.label {
+    font-size: 2em;
+}
+.label-small {
+    font-size: 1.2em;
+}
+
+.tobottom {
+    display: flex;
+    align-items: flex-end;    /* Align to the bottom vertically */
+    height: 40px;            /* Example container height */
+    width: 300px;;
+    float: left;
+}
