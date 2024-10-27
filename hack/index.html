@@ -7,8 +7,9 @@
 
     <link rel="stylesheet" href="styles.css" type="text/css" />
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js'></script>
-    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.js'></script>
     <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular-route.js'></script>
+    <script src='questions.js'></script>
     <script>
       var app = angular.module("app", ["ngRoute"]);
 
@@ -25,11 +26,19 @@
           .otherwise('/home')
       });
 
-      app.controller("HomeCtrl", function($scope, $http) {
+      app.controller("HomeCtrl", function($scope, $http, $location, $window) {
+
+        const user = $location.search().user;
+        console.log('User:', user); 
+
+        $scope.state = 'initial';
+
         $scope.sliderValue = 0;
         $scope.sliderValue2 = 0;
+        $scope.sliderValue3 = 0;
         $scope.sliderTouched = false;
         $scope.sliderTouched2 = false;
+        $scope.sliderTouched3 = false;
 
         $scope.change = function() {
             $scope.sliderTouched = true;
@@ -37,22 +46,31 @@
         $scope.change2 = function() {
             $scope.sliderTouched2 = true;
         }
+        
+        $scope.change3 = function() {
+            $scope.sliderTouched3 = true;
+        }
 
         $scope.submit = function() {
-          console.log("Submit clicked: " + $scope.sliderValue);
+          let data = [$scope.sliderValue, $scope.sliderValue2, $scope.sliderValue3];
+          console.log("Submit clicked: ", data);
 
-          const payload = {
-            sliderValue: $scope.sliderValue
-          };
+          $window.addData(data);
+
+          $scope.state = 'submitted';
+
+          // const payload = {
+          //   sliderValue: $scope.sliderValue
+          // };
           
-          $http.post('https://api.example.com/data', payload)
-              .then(function(response) {
-                  console.log("Response:", response.data);
-              })
-              .catch(function(error) {
-                  console.error("Error:", error);
-              });
-          }
+          // $http.post('https://api.example.com/data', payload)
+          //     .then(function(response) {
+          //         console.log("Response:", response.data);
+          //     })
+          //     .catch(function(error) {
+          //         console.error("Error:", error);
+          //     });
+        }
 
       });
 
@@ -68,6 +86,7 @@
 
     <script type="text/ng-template" id="home.html">
 
+      <span ng-show="state === 'initial'"> 
       <div class="question" style="padding: 40px">
 
         <img src="images/pepsi.png" height=100 style="margin-left:-40px;">
@@ -96,7 +115,7 @@
 
       <div class="question" style="padding: 40px">
 
-        <img src="images/kamala.png" height=100 style="margin-left:-40px;">
+        <img src="images/kamala.png" height=100 style="margin-left:-10px;">
         <img src="images/trump.png"  height=90 style="margin-left:200px;">
         <br>
 
@@ -118,7 +137,36 @@
       <br>
       <br>
 
-      <input type="submit" ng-click="submit()">
+      <div class="question" style="padding: 40px">
+
+        <img src="images/she.png" height=100 style="margin-left:-10px;">
+        <img src="images/he.png"  height=90 style="margin-left:200px;">
+        <br>
+
+        <span class="tobottom">
+            <input type="range" min="-5" max="5" ng-model="sliderValue3" ng-change="change3()" style="width:400px;">
+        </span>
+        <span class="tobottom">
+            <span class="label-small" ng-if="!sliderTouched3">move the slider to decide</span>
+            <span class="label" ng-if="sliderTouched3">{{sliderValue3}}</span>
+        </span>
+
+        <br><br>
+      </div>
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+
+      <input type="submit" ng-click="submit()" style="margin-left: 200px">
+      </span>
+    
+      <span ng-show="state === 'submitted'"> 
+        <h1>Thank you!</h1>
+      </span>
 
 
 
@@ -132,4 +180,44 @@
   </body>
 
   <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+
+  <script type="module">
+    // Import the functions you need from the SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"; // Import Firestore SDK
+
+
+    // Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyBF1jmGcIEKLUyA2fr0oeapr1Pht9AB1bc",
+        authDomain: "encode-hack.firebaseapp.com",
+        projectId: "encode-hack",
+        storageBucket: "encode-hack.appspot.com",
+        messagingSenderId: "971329735542",
+        appId: "1:971329735542:web:1b4ddebcc00bb707250857",
+        measurementId: "G-3GP4BHRV2D"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const db = getFirestore(app); // Initialize Firestore
+
+
+    window.addData = async function(data) {
+        console.log(data);
+
+        try {
+            const docRef = await addDoc(collection(db, "myCollection"), {
+              responses: data
+            });
+            console.log("Document written with ID: ", docRef.id);
+            // alert("Data added successfully!");
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+    }
+ 
+</script>
 </html>

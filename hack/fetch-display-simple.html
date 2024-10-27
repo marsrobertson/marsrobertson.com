@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histograms for Survey Questions</title>
+    <style>
+        .histogram-container {
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+
+        .bar {
+            width: 40px;
+            background-color: steelblue;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .bar span {
+            position: absolute;
+            top: -20px;
+            width: 100%;
+            font-size: 14px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="histogram-container1" class="histogram-container"></div>
+    <div id="histogram-container2" class="histogram-container"></div>
+    <div id="histogram-container3" class="histogram-container"></div>
+
+    <script>
+        // Sample data
+        const data = [
+            { responses: [-4, 2, 3] },
+            { responses: [-3, 3, -3] },
+            { responses: [4, -2, 4] },
+            { responses: [2, -4, 3] },
+            { responses: [3, -3, 1] }
+        ];
+
+        function renderHistogram(answers, containerId) {
+            const container = document.getElementById(containerId);
+            const responses = data[questionIndex].responses;
+            const histogramContainer = document.createElement('div');
+            histogramContainer.classList.add('histogram-container');
+            container.appendChild(histogramContainer);
+            for (let i = 0; i < 5; i++) {
+                const bar = document.createElement('div');
+                bar.classList.add('bar');
+                bar.textContent = responses[i]);
+                histogramContainer.appendChild(bar);
+            }
+        }
+
+        let question1answers = [];
+        let question2answers = [];
+        let question3answers = [];
+
+        for (let i = 0; i < data.length; i++) {
+            question1answers.push(data[i][0]);
+            question2answers.push(data[i][1]);
+            question3answers.push(data[i][2]);
+        }
+        
+
+        // Render histograms for each question
+        renderHistogram(question1answers, 'histogram-container1');
+        renderHistogram(question2answers, 'histogram-container2');
+        renderHistogram(question3answers, 'histogram-container3');
+    </script>
+
+</body>
+</html>

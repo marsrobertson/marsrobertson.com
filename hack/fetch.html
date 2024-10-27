@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch All Replies from Firestore</title>
+    <script type="module">
+        // Import the functions you need from the SDKs
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBF1jmGcIEKLUyA2fr0oeapr1Pht9AB1bc",
+            authDomain: "encode-hack.firebaseapp.com",
+            projectId: "encode-hack",
+            storageBucket: "encode-hack.appspot.com",
+            messagingSenderId: "971329735542",
+            appId: "1:971329735542:web:1b4ddebcc00bb707250857",
+            measurementId: "G-3GP4BHRV2D"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Function to fetch all documents (replies) from Firestore
+        async function fetchAllReplies() {
+            const querySnapshot = await getDocs(collection(db, "myCollection"));
+            const replies = [];
+            querySnapshot.forEach((doc) => {
+                // Collect each document's data
+                replies.push(doc.data());
+            });
+            console.log("All Replies:", replies);
+            // alert("Replies fetched: " + JSON.stringify(replies));
+
+
+            
+        }
+
+        // Make fetchAllReplies function accessible globally
+        window.fetchAllReplies = fetchAllReplies;
+    </script>
+</head>
+<body>
+    <h1>Fetch All Replies from Firestore</h1>
+    <!-- Button to trigger fetching all replies -->
+    <button onclick="fetchAllReplies()">Fetch All Replies</button>
+
+
+
+</body>
+</html>

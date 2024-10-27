@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Static HTML Example</title>
+    <!-- Import Firebase SDK -->
+    <script type="module">
+        // Import the functions you need from the SDKs
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"; // Import Firestore SDK
+
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBF1jmGcIEKLUyA2fr0oeapr1Pht9AB1bc",
+            authDomain: "encode-hack.firebaseapp.com",
+            projectId: "encode-hack",
+            storageBucket: "encode-hack.appspot.com",
+            messagingSenderId: "971329735542",
+            appId: "1:971329735542:web:1b4ddebcc00bb707250857",
+            measurementId: "G-3GP4BHRV2D"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getFirestore(app); // Initialize Firestore
+
+
+        window.addData = async function(data) {
+            console.log(data);
+
+            try {
+                const docRef = await addDoc(collection(db, "myCollection"), {
+                    name: "Mars",
+                    age: 30,
+                    city: "Lisbon"
+                });
+                console.log("Document written with ID: ", docRef.id);
+                alert("Data added successfully!");
+            } catch (e) {
+                console.error("Error adding document: ", e);
+            }
+        }
+        
+        addData();
+    </script>
+</head>
+<body>
+    <h1>Welcome to Firebase Static HTML</h1>
+    <p>Your Firebase is initialized in this HTML file.</p>
+</body>
+</html>
